@@ -1,3 +1,4 @@
+require 'posabot_config'
 class PosabotSubscriber
   class << self
     attr_accessor :configuration
