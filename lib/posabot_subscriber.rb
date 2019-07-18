@@ -1,4 +1,4 @@
-module PosabotSubscriber
+class PosabotSubscriber
   class << self
     attr_accessor :configuration
 
