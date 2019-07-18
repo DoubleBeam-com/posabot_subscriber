@@ -38,7 +38,7 @@ class PosabotSubscriber
     @boradcast_exchange ||= channel.fanout('posabot.broadcast')
   end
 
-  def reply_exchange
+  def replay_exchange
     @reply_exchange ||= channel.fanout('posabot.reply')
   end
 
@@ -50,12 +50,12 @@ class PosabotSubscriber
     @broadcast_queue
   end
 
-  def reply_queue
-    unless @reply_queue
-      @reply_queue ||= channel.queue('posabot.reply', exclusive: true)
-      @reply_queue.bind(reply_exchange)
+  def replay_queue
+    unless @replay_queue
+      @replay_queue ||= channel.queue('posabot.reply', exclusive: true)
+      @replay_queue.bind(reply_exchange)
     end
-    @reply_queue
+    @replay_queue
   end
 
   def post_to_posabot(room: 'laboratory', message: )
