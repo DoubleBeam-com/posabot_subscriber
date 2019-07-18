@@ -2,12 +2,12 @@ require 'posabot_config'
 class PosabotSubscriber
   class << self
     attr_accessor :configuration
+  end
 
-    def configure
-      configuration ||= Posabot::Config.new
-      yield(configuration) if block_given?
-      configuration
-    end
+  def self.configure
+    self.configuration ||= Posabot::Config.new
+    yield(configuration) if block_given?
+    configuration
   end
 
   def config
