@@ -3,7 +3,7 @@ class PosabotSubscriber
     attr_accessor :configuration
 
     def configure
-      configuration ||= Postabot::Config.new
+      configuration ||= Posabot::Config.new
       yield(configuration) if block_given?
       configuration
     end
@@ -16,10 +16,10 @@ class PosabotSubscriber
   def client
     unless @client
       c = Bunny.new(
-        host: @config.host,
-        port: @config.port,
-        user: @config.user,
-        pass: @config.user,
+        host: config.host,
+        port: config.port,
+        user: config.user,
+        pass: config.user,
       )
       c.start
       @client = c
