@@ -50,7 +50,7 @@ class PosabotSubscriber
 
   def broadcast_queue
     unless @broadcast_queue
-      @broadcast_queue  ||= channel.queue('posabot.broadcast', exclusive: true)
+      @broadcast_queue  = channel.queue('', exclusive: true)
       @broadcast_queue.bind(broadcast_exchange)
     end
     @broadcast_queue
@@ -58,7 +58,7 @@ class PosabotSubscriber
 
   def replay_queue
     unless @replay_queue
-      @replay_queue ||= channel.queue('posabot.reply', exclusive: true)
+      @replay_queue = channel.queue('', exclusive: true)
       @replay_queue.bind(replay_exchange)
     end
     @replay_queue
