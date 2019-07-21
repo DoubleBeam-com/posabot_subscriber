@@ -20,13 +20,12 @@ class PosabotSubscriber
         host: config.host,
         port: config.port,
         user: config.user,
-        pass: config.user,
+        pass: config.pass,
       )
       c.start
       @client = c
 
       # We only want to accept one un-acked message
-      @client.qos :prefetch_count => 1
     end
     @client
   end
@@ -40,7 +39,7 @@ class PosabotSubscriber
   end
 
   def replay_exchange
-    @reply_exchange ||= channel.fanout('posabot.reply')
+    @replay_exchange ||= channel.fanout('posabot.reply')
   end
 
   def broadcast_queue
@@ -54,13 +53,13 @@ class PosabotSubscriber
   def replay_queue
     unless @replay_queue
       @replay_queue ||= channel.queue('posabot.reply', exclusive: true)
-      @replay_queue.bind(reply_exchange)
+      @replay_queue.bind(replay_exchange)
     end
     @replay_queue
   end
 
   def post_to_posabot(room: 'laboratory', message: )
-    reply_exchange.publish({room: room, message: message})
+    replay_exchange.publish({room: room, message: message})
   end
 
   def subcribe_to_posabot
