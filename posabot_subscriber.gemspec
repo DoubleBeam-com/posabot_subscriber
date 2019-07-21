@@ -9,5 +9,7 @@ Gem::Specification.new do |s|
     "lib/posabot_subscriber.rb",
     "lib/posabot_config.rb"
   ]
-  s.require_paths = ["lib"]
+  s.add_dependency 'net-ping'
+  s.add_dependency 'bunny'
+  s.require_paths = ['lib']
 end

@@ -1,4 +1,5 @@
 require 'posabot_config'
+require 'net/ping'
 class PosabotSubscriber
   class << self
     attr_accessor :configuration
@@ -22,6 +23,11 @@ class PosabotSubscriber
         user: config.user,
         pass: config.pass,
       )
+      ping_command = Net::Ping::TCP.new(host=config.host, port=config.port)
+      until ping_command.ping?
+        puts 'Waiting for rabbitmq to come online'
+        sleep 1
+      end
       c.start
       @client = c
 
