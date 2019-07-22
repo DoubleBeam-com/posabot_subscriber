@@ -44,28 +44,29 @@ class PosabotSubscriber
     @boradcast_exchange ||= channel.fanout('posabot.broadcast')
   end
 
-  def replay_exchange
-    @replay_exchange ||= channel.fanout('posabot.reply')
+  def inbox_exchange
+    @inbox_exchange ||= channel.fanout('posabot.inbox')
   end
 
   def broadcast_queue
     unless @broadcast_queue
-      @broadcast_queue  = channel.queue('', exclusive: true)
+      @broadcast_queue  = channel.queue('', exclusive: true, name: 'broadcast')
       @broadcast_queue.bind(broadcast_exchange)
     end
     @broadcast_queue
   end
 
-  def replay_queue
-    unless @replay_queue
-      @replay_queue = channel.queue('', exclusive: true)
-      @replay_queue.bind(replay_exchange)
+  def inbox_queue
+    unless @inbox_queue
+      @inbox_queue = channel.queue('', exclusive: true, name: 'inbox')
+      @inbox_queue.bind(inbox_exchange)
     end
-    @replay_queue
+    @inbox_queue
   end
 
   def post_to_posabot(room: 'laboratory', message: )
-    replay_exchange.publish({room: room, message: message})
+    message_to_send = message || 'no message passed'
+    inbox_exchange.publish({room: room, message: message_to_send})
   end
 
   def subcribe_to_posabot
