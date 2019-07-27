@@ -1,6 +1,7 @@
 require 'posabot_config'
 require 'net/ping'
 class PosabotSubscriber
+  include Singleton
   class << self
     attr_accessor :configuration
   end
