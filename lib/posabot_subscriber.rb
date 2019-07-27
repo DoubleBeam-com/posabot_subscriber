@@ -37,6 +37,14 @@ class PosabotSubscriber
     @client
   end
 
+  def room
+    @room ||= config.room
+  end
+
+  def room=(room)
+    @room = config.room = room
+  end
+
   def channel
     @channel ||= client.create_channel
   end
