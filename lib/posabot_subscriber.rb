@@ -1,5 +1,6 @@
 require 'posabot_config'
 require 'net/ping'
+require 'singleton'
 class PosabotSubscriber
   include Singleton
   class << self

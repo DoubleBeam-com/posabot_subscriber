@@ -29,7 +29,8 @@ module Posabot
         @host = config.fetch('rabbitmq_host')
         @port = config.fetch('rabbitmq_port')
         @user = config.fetch('rabbitmq_user')
-        @pass = config.fetch('default_room', nil)
+        @pass = config.fetch('rabbitmq_pass')
+        @room = config.fetch('default_room', nil)
       else
         raise 'omg not configured'
       end
