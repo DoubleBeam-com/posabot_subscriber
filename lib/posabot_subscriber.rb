@@ -55,6 +55,9 @@ class PosabotSubscriber
 
   def broadcast_exchange
     @boradcast_exchange ||= channel.fanout('posabot.broadcast')
+  rescue => e
+    binding.pry
+    puts e
   end
 
   def inbox_exchange
