@@ -11,6 +11,5 @@ Gem::Specification.new do |s|
   ]
   s.add_dependency 'net-ping'
   s.add_dependency 'bunny'
-  s.add_dependency 'singleton'
   s.require_paths = ['lib']
 end
