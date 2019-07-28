@@ -63,7 +63,7 @@ class PosabotSubscriber
 
   def broadcast_queue
     unless @broadcast_queue
-      @broadcast_queue  = channel.queue('posabot.broadcast', exclusive: true, name: 'broadcast')
+      @broadcast_queue  = channel.queue('posabot.broadcast', name: 'broadcast')
       @broadcast_queue.bind(broadcast_exchange)
     end
     @broadcast_queue
@@ -71,7 +71,7 @@ class PosabotSubscriber
 
   def inbox_queue
     unless @inbox_queue
-      @inbox_queue = channel.queue('posabot.inbox', exclusive: true, name: 'inbox')
+      @inbox_queue = channel.queue('posabot.inbox', name: 'inbox')
       @inbox_queue.bind(inbox_exchange)
     end
     @inbox_queue
