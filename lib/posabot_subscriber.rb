@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 require 'posabot_config'
 require 'net/ping'
 require 'singleton'
+
 class PosabotSubscriber
   include Singleton
   class << self
