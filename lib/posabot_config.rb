@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Posabot
   class Config
     attr_accessor :host, :user, :pass, :port, :room
@@ -35,7 +37,6 @@ module Posabot
         raise 'omg not configured'
       end
     rescue => e
-      binding.pry
       puts e
     end
   end
